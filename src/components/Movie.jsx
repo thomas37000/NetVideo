@@ -50,14 +50,24 @@ export default function Movie(props) {
             duration: {runtime} min
           </CardSubtitle>
           <CardSubtitle tag="h4" className="mb-2 text-muted">
+            director: {director}
+          </CardSubtitle>
+          <CardSubtitle tag="h4" className="mb-2 text-muted">
+            actors: {actors}
+          </CardSubtitle>
+          <CardSubtitle tag="h4" className="mb-2 text-muted">
             {year}
           </CardSubtitle>
           <CardText>{plot}</CardText>
-          <Link to={`/movie-detail/${id}`}>
-            <Button color="success" className="Button">
-              Wiew More
-            </Button>
-          </Link>
+
+          <Button
+            color="success"
+            className="Button"
+            tag={Link}
+            to={`/movie-detail/${id}`}
+          >
+            Wiew More
+          </Button>
         </CardBody>
       </Card>
     </div>

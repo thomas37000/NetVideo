@@ -9,53 +9,20 @@ class MovieList extends Component {
     super(props);
     this.state = {
       movies: [],
-      recentMovies: false,
+      genres: [],
+      directorMovies: false,
       durationMovies: false,
-      crimeMovies: false,
-      // movies: [
-      //   {
-      //     id: 1,
-      //     title: "Beetlejuice",
-      //     year: "1988",
-      //     runtime: "92",
-      //     genres: ["Comedy", "Fantasy"],
-      //     director: "Tim Burton",
-      //     actors: "Alec Baldwin, Geena Davis, Annie McEnroe, Maurice Page",
-      //     plot:
-      //       'A couple of recently deceased ghosts contract the services of a "bio-exorcist" in order to remove the obnoxious new owners of their house.',
-      //     posterUrl:
-      //       "https://images-na.ssl-images-amazon.com/images/M/MV5BMTUwODE3MDE0MV5BMl5BanBnXkFtZTgwNTk1MjI4MzE@._V1_SX300.jpg",
-      //   },
-      //   {
-      //     id: 2,
-      //     title: "The Cotton Club",
-      //     year: "1984",
-      //     runtime: "127",
-      //     genres: ["Crime", "Drama", "Music"],
-      //     director: "Francis Ford Coppola",
-      //     actors: "Richard Gere, Gregory Hines, Diane Lane, Lonette McKee",
-      //     plot:
-      //       "The Cotton Club was a famous night club in Harlem. The story follows the people that visited the club, those that ran it, and is peppered with the Jazz music that made it so famous.",
-      //     posterUrl:
-      //       "https://images-na.ssl-images-amazon.com/images/M/MV5BMTU5ODAyNzA4OV5BMl5BanBnXkFtZTcwNzYwNTIzNA@@._V1_SX300.jpg",
-      //   },
-      //   {
-      //     id: 3,
-      //     title: "The Shawshank Redemption",
-      //     year: "1994",
-      //     runtime: "142",
-      //     genres: ["Crime", "Drama"],
-      //     director: "Frank Darabont",
-      //     actors: "Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler",
-      //     plot:
-      //       "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-      //     posterUrl:
-      //       "https://images-na.ssl-images-amazon.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1_SX300.jpg",
-      //   },
-      // ],
+      genreMovies: false,
+      oldMovies: false,
+      recentMovies: false,
+      searchString: "",
     };
     this.FetchMovies = this.FetchMovies.bind(this);
     this.MoviesHandler = this.MoviesHandler.bind(this);
+    this.MoviesHandler2 = this.MoviesHandler2.bind(this);
+    this.MoviesHandler3 = this.MoviesHandler3.bind(this);
+    this.MoviesHandler4 = this.MoviesHandler4.bind(this);
+    this.MovieDirector = this.MovieDirector.bind(this);
   }
 
   componentDidMount() {
@@ -65,40 +32,109 @@ class MovieList extends Component {
   FetchMovies() {
     Axios.get(
       "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
-    ).then((res) => this.setState({ movies: res.data.movies }));
+    ).then((res) =>
+      this.setState({ movies: res.data.movies, genres: res.data.genres })
+    );
   }
 
   MoviesHandler() {
     console.log("test");
     const Recent = this.state.recentMovies;
-    const Time = this.state.durationMovies;
-    const Crime = this.state.crimeMovies;
     this.setState({
       recentMovies: !Recent,
-      durationMovies: !Time,
-      crimeMovies: !Crime,
     });
   }
 
+  MoviesHandler2() {
+    const Old = this.state.oldMovies;
+    this.setState({
+      oldMovies: !Old,
+    });
+  }
+
+  MoviesHandler3() {
+    const Time = this.state.durationMovies;
+    this.setState({
+      durationMovies: !Time,
+    });
+  }
+
+  MoviesHandler4() {
+    const Genre = this.state.genreMovies;
+    this.setState({
+      genreMovies: !Genre,
+    });
+  }
+
+  MovieDirector() {
+    const Director = this.state.directorMovies;
+    this.setState({
+      directorMovies: !Director,
+    });
+  }
+
+  handleChange = (event) => {
+    this.setState({ searchString: event.target.value });
+  };
+
   render() {
-    const { crimeMovies, durationMovies, movies, recentMovies } = this.state;
+    const {
+      directorMovies,
+      durationMovies,
+      genres,
+      genreMovies,
+      handleChange,
+      movies,
+      oldMovies,
+      recentMovies,
+      searchString,
+    } = this.state;
+
     return (
       <div className="MovieList">
+        <input
+          type="text"
+        
+          onChange={handleChange}
+          placeholder="search..."
+        />
         <Button onClick={this.MoviesHandler}>
           {recentMovies ? "all movies" : "recent movies"}
         </Button>
-        <Button onClick={this.MoviesHandler}>
+        <Button onClick={this.MoviesHandler2}>
+          {oldMovies ? "all movies" : "old movies"}
+        </Button>
+        <Button onClick={this.MoviesHandler3}>
           {durationMovies ? "all movies" : "long movies"}
         </Button>
-        <Button onClick={this.MoviesHandler}>
-          {crimeMovies ? "all movies" : "Crime movies"}
+
+        <Button onClick={this.MovieDirector}>
+          {directorMovies ? "all movies" : "Tim Burton"}
+        </Button>
+        <Button onClick={this.MoviesHandler4}>
+          {genreMovies ? "all movies" : "War movies"}
         </Button>
         {movies
-          .filter(
-            (movie) => (recentMovies ? parseInt(movie.year) > 2000 : true),
-            (movie) => (durationMovies ? parseInt(movie.runtime) > 100 : true),
-            (movie) => (crimeMovies ? movie.genres === "Crime" : true)
-          )
+          .filter((movie) => {
+            return recentMovies
+              ? parseInt(movie.year) >= 2010
+              : true && oldMovies
+              ? parseInt(movie.year) <= 1980
+              : true && durationMovies
+              ? parseInt(movie.runtime) >= 180
+              : true && directorMovies
+              ? movie.director === "Tim Burton"
+              : "all" && genreMovies
+              ? movie.genres === "War"
+              : "all";
+          })
+          // .filter((movie) => {
+          //   if(searchString == "") {
+          //   return movie
+          // } else if(movie.) {
+          //   return movie
+          // } 
+          // })
           .map((movie) => (
             <Movie key={movie.id} {...movie} />
           ))}
