@@ -4,8 +4,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import Main from "./components/main";
 import NavBar from "./components/NavBar";
-import MovieList from "./components/MovieList";
 import MovieDetails from "./components/MovieDetails";
 import "./App.css";
 
@@ -16,7 +16,7 @@ function App() {
         <NavBar />
         <Switch>
           <Route exact path="/movies">
-            <MovieList />
+            <Main />
           </Route>
           <Route path="/movie-detail/:id" component={MovieDetails} />
           <Redirect to="/movies" />

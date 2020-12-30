@@ -1,0 +1,101 @@
+
+html::before {
+  content:"";
+  display:block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  width: 100%;
+  z-index:-1;
+  background-image: url('https://p0.storage.canalblog.com/05/58/849913/113855401.jpg');
+  background-size: auto;
+}
+
+.liste {
+  width: 50%;
+  background: red;
+}
+.MovieList {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px 0px;
+}
+.movieCard {
+  align-items: center;
+  width: 70%;
+  background: #fff;
+}
+
+.movieCard:hover {
+  background-color: lightgray;
+}
+
+.FormMovie {
+  width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.FormMovie h1 {
+  text-align: center;
+}
+
+.FormMovie .form-data {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+.FormMovie .form-data label {
+  display: inline-block;
+  width: 75px;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.FormMovie .form-data input:not([type="submit"]) {
+  flex-grow: 1;
+}
+
+.button {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.Button a {
+  color: #fff;
+}
+
+.card-body {
+  width: 50%;
+  display: grid;
+}
+
+.card-body:hover {
+  background-color: lightgray;
+}
+
+img {
+  width: 350px;
+}
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  .movieCard {
+    height: 10rem;
+  }
+
+  .title,
+  .duration,
+  .director,
+  .actors,
+  .year,
+  .description {
+    display: none;
+  }
+
+  .MovieList {
+    display: flex;
+  }
+  img {
+    width: 200px;
+  }
+}

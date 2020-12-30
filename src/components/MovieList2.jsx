@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { Button } from "reactstrap";
-import PropTypes from "prop-types";
-import Movie from "./Movie";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Row, Col, Container, Button } from "reactstrap";
 import axios from "axios";
+import MovieCard from "./MovieCard";
 import "./Main.css";
 
-class MovieList extends Component {
+export default class MovieList2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
       movies: [],
       genres: [],
+      filter: false,
       directorMovies: false,
       durationMovies: false,
       genreMovies: false,
@@ -92,59 +93,61 @@ class MovieList extends Component {
       oldMovies,
       recentMovies,
       searchString,
+      filter,
     } = this.state;
 
     return (
-      <div>
-        <input type="text" onChange={handleChange} placeholder="search..." />
-        <Button onClick={this.MoviesHandler}>
-          {recentMovies ? "all movies" : "recent movies"}
-        </Button>
-        <Button onClick={this.MoviesHandler2}>
-          {oldMovies ? "all movies" : "old movies"}
-        </Button>
-        <Button onClick={this.MoviesHandler3}>
-          {durationMovies ? "all movies" : "long movies"}
-        </Button>
+      <Container>
+        <Row className="py-5">
+          <Col>
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder="search..."
+            />
+            <Button onClick={this.MoviesHandler}>
+              {recentMovies ? "all movies" : "recent movies"}
+            </Button>
+            <Button onClick={this.MoviesHandler2}>
+              {oldMovies ? "all movies" : "old movies"}
+            </Button>
+            <Button onClick={this.MoviesHandler3}>
+              {durationMovies ? "all movies" : "long movies"}
+            </Button>
 
-        <Button onClick={this.MovieDirector}>
-          {directorMovies ? "all movies" : "Tim Burton"}
-        </Button>
-        <Button onClick={this.MoviesHandler4}>
-          {genreMovies ? "all movies" : "War movies"}
-        </Button>
-        <div className="MovieList">
-          {movies
-            .filter((movie) => {
-              return recentMovies
-                ? parseInt(movie.year) >= 2010
-                : true && oldMovies
-                ? parseInt(movie.year) <= 1980
-                : true && durationMovies
-                ? parseInt(movie.runtime) >= 180
-                : true && directorMovies
-                ? movie.director === "Tim Burton"
-                : "all" && genreMovies
-                ? movie.genres === "War"
-                : "all";
-            })
-            // .filter((movie) => {
-            //   if(searchString == "") {
-            //   return movie
-            // } else if(movie.) {
-            //   return movie
-            // }
-            // })
-            .map((movie) => (
-              <Movie key={movie.id} {...movie} />
-            ))}
-          {/* {genres.map((genre) => (
-          <Movie key={genre.id} {...genre} />
-        ))} */}
-        </div>
-      </div>
+            <Button onClick={this.MovieDirector}>
+              {directorMovies ? "all movies" : "Tim Burton"}
+            </Button>
+            <Button onClick={this.MoviesHandler4}>
+              {genreMovies ? "all movies" : "War movies"}
+            </Button>
+          </Col>
+
+          <Row xs="3" className="MovieList">
+            {movies
+              .filter((movie) => {
+                return recentMovies
+                  ? parseInt(movie.year) >= 2010
+                  : true && oldMovies
+                  ? parseInt(movie.year) <= 1980
+                  : true && durationMovies
+                  ? parseInt(movie.runtime) >= 180
+                  : true && directorMovies
+                  ? movie.director === "Tim Burton"
+                  : "all" && genreMovies
+                  ? movie.genres === "War"
+                  : "all";
+              })
+              .map((movie) => (
+                <MovieCard
+                  {...movie}
+                  key={movie.id}
+                  handleClick={() => this.deleteGame(movie.id)}
+                />
+              ))}
+          </Row>
+        </Row>
+      </Container>
     );
   }
 }
-
-export default MovieList;

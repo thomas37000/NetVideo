@@ -28,30 +28,27 @@ class MovieDetails extends Component {
     this.state = {
       moviesDetail: [],
       genres: [],
-      detailClip: {},
     };
-    this.getGame = this.getGame.bind(this);
-    // this.getGameImages = this.getGameImages.bind(this);
+    this.getMovie = this.getMovie.bind(this);
+    // this.getMovieImages = this.getMovieImages.bind(this);
   }
 
   componentDidMount() {
-    this.getGame();
-    // this.getGameImages();
+    this.getMovie();
+    // this.getMovieImages();
   }
 
-  getGame() {
+  getMovie() {
     const { id } = this.props.match.params;
     console.log(id);
     axios
       .get(
-        `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json/${id}`
+        `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json`
       )
-      .then((res) =>
-        this.setState({
-          moviesDetail: res.data.movies,
-          genres: res.data.genres,
-        })
-      );
+      .then((res) => {
+        console.log("movie detail", res);
+        this.setState({ movies: res.data.movies, genres: res.data.genres });
+      });
   }
   
   render() {
@@ -61,8 +58,7 @@ class MovieDetails extends Component {
       <div className="CardsDetail">
         <Card>
           <CardBody>
-            <CardTitle tag="h5">{moviesDetail.title}</CardTitle>
-            <CardText>genre : {genres.name}</CardText>
+            <CardTitle tag="h5">movie: {moviesDetail.title}</CardTitle>
           </CardBody>
         </Card>
       </div>
