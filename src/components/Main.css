@@ -16,6 +16,10 @@ html::before {
   flex-wrap: nowrap;
 }
 
+.rec-slider-container {
+  background: #fff;
+}
+
 .MovieList {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px 0px;
 }

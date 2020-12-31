@@ -15,7 +15,7 @@ const Container = styled.div`
     margin: 0;
     padding: 0;
   }
-  
+
   .bg {
     position: relative;
   }
@@ -67,7 +67,6 @@ const Container = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-   
     .bg {
       width: 300px;
       height: 450px;
