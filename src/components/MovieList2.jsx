@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Container, Button } from "reactstrap";
 import axios from "axios";
-import MovieCard from "./MovieCard";
+// import MovieCard from "./MovieCard";
+import Grid from "./MovieCard2";
 import "./Main.css";
 
 export default class MovieList2 extends Component {
@@ -123,7 +124,7 @@ export default class MovieList2 extends Component {
             </Button>
           </Col>
 
-          <Row xs="3" className="MovieList">
+          
             {movies
               .filter((movie) => {
                 return recentMovies
@@ -139,13 +140,13 @@ export default class MovieList2 extends Component {
                   : "all";
               })
               .map((movie) => (
-                <MovieCard
+                <Grid
                   {...movie}
                   key={movie.id}
                   handleClick={() => this.deleteGame(movie.id)}
                 />
               ))}
-          </Row>
+          
         </Row>
       </Container>
     );

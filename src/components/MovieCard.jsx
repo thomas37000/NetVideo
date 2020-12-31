@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import { Button } from "reactstrap";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./Main.css";
 
 export default function Movie(props) {
@@ -18,16 +18,7 @@ export default function Movie(props) {
 
   return (
     <div className="movieCard">
-      <h2 className="title">{title}</h2>
-      <img src={posterUrl} 
-        alt={title} />
-      <h3 className="director">director: {director}</h3>
-      <h3 className="year">year: {year}</h3>
-      <p className="duration">duration: {runtime} min</p>
-      <p className="genres">genre: {genres}</p>
-      <p className="actors">actors: {actors}</p>
-      <p className="description">description: {plot}</p>
-
+      <img src={posterUrl} alt={title} />
       <Button
         color="success"
         className="Button"
@@ -37,6 +28,5 @@ export default function Movie(props) {
         Wiew More
       </Button>
     </div>
-  )
+  );
 }
-

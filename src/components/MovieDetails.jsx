@@ -50,15 +50,33 @@ class MovieDetails extends Component {
         this.setState({ movies: res.data.movies, genres: res.data.genres });
       });
   }
-  
+
   render() {
-    const { moviesDetail, genres} = this.state;
+    const {
+      actors,
+      id,
+      director,
+      plot,
+      posterUrl,
+      genres,
+      moviesDetail,
+      runtime,
+      title,
+      year,
+    } = this.state;
 
     return (
       <div className="CardsDetail">
         <Card>
           <CardBody>
             <CardTitle tag="h5">movie: {moviesDetail.title}</CardTitle>
+            <h2 className="title">{title}</h2>
+            <h3 className="director">director: {director}</h3>
+            <h3 className="year">year: {year}</h3>
+            <p className="duration">duration: {runtime} min</p>
+            <p className="genres">genre: {genres}</p>
+            <p className="actors">actors: {actors}</p>
+            <p className="description">description: {plot}</p>
           </CardBody>
         </Card>
       </div>

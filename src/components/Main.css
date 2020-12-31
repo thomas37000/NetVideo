@@ -1,4 +1,3 @@
-
 html::before {
   content:"";
   display:block;
@@ -12,17 +11,18 @@ html::before {
   background-size: auto;
 }
 
-.liste {
-  width: 50%;
-  background: red;
+.row {
+  display: flex;
+  flex-wrap: nowrap;
 }
+
 .MovieList {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px 0px;
 }
 .movieCard {
   align-items: center;
-  width: 70%;
   background: #fff;
+  max-width: 30%;
 }
 
 .movieCard:hover {
