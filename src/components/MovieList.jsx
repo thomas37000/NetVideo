@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import Movie from "./Movie";
 import axios from "axios";
 import "./Main.css";

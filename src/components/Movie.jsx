@@ -1,14 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-} from "reactstrap";
+import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./Main.css";

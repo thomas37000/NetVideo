@@ -1,18 +1,32 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col, Container, Button } from "reactstrap";
+// import { Row, Col, Container, Button } from "reactstrap";
+import Carousel from "react-elastic-carousel";
 import axios from "axios";
 // import MovieCard from "./MovieCard";
 import Grid from "./MovieCard2";
 import "./Main.css";
 
+const breakPoints = [
+  { width: 1, itemsToShow: 2 },
+  { width: 550, itemsToShow: 2, itemsToScroll: 4 },
+  { width: 768, itemsToShow: 3 },
+  { width: 1200, itemsToShow: 4 }
+];
+
 export default class OldMovies extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [],
       filter: false,
       oldMovies: true,
+      movies: [
+        { id: 1, title: "" },
+        { id: 2, title: "" },
+        { id: 3, title: "" },
+        { id: 4, title: "" },
+        { id: 5, title: "" },
+      ],
     };
     this.FetchMovies = this.FetchMovies.bind(this);
     this.MoviesHandler2 = this.MoviesHandler2.bind(this);
@@ -54,23 +68,21 @@ export default class OldMovies extends Component {
     } = this.state;
 
     return (
-      <Container>
-        <Row className="py-5">
-          {movies
-            .filter((movie) => {
-              return oldMovies
+      <Carousel breakPoints={breakPoints}>
+        {movies
+          .filter((movie) => {
+            return oldMovies
               ? parseInt(movie.year) <= 1980
-              : true && durationMovies
-            })
-            .map((movie) => (
-              <Grid
-                {...movie}
-                key={movie.id}
-                handleClick={() => this.deleteGame(movie.id)}
-              />
-            ))}
-        </Row>
-      </Container>
+              : true && durationMovies;
+          })
+          .map((movie) => (
+            <Grid
+              {...movie}
+              key={movie.id}
+              handleClick={() => this.deleteGame(movie.id)}
+            />
+          ))}
+      </Carousel>
     );
   }
 }

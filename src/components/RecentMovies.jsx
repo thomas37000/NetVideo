@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col, Container, Button } from "reactstrap";
+// import { Row, Col, Container, Button } from "reactstrap";
 import Carousel from "react-elastic-carousel";
 import axios from "axios";
 // import MovieCard from "./MovieCard";

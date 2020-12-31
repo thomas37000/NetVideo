@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Col, Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
+import { Card, CardBody, CardTitle } from "reactstrap";
 
 // componentDidMount() {
 //   const { match: { params } } = this.props;
@@ -40,11 +40,11 @@ class MovieDetails extends Component {
 
   getMovie() {
     const { id } = this.props.match.params;
-    console.log(id);
     axios
       .get(
         `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json`
       )
+      
       .then((res) => {
         console.log("movie detail", res);
         this.setState({ movies: res.data.movies, genres: res.data.genres });
