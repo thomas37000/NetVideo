@@ -1,12 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
-import Main from "./components/main";
-import NavBar from "./components/NavBar";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MovieDetails from "./components/MovieDetails";
+import MovieList from "./components/MovieList";
+import NavBar from "./components/NavBar";
+import Main from "./components/main";
 import "./App.css";
 
 function App() {
@@ -16,11 +13,10 @@ function App() {
         <NavBar />
         <Switch>
           <Route exact path="/movies">
-            <Main />
+            <MovieList />
           </Route>
           <Route path="/movie-detail/:id" component={MovieDetails} />
-          <Redirect to="/movies" />
-          <Route exact path="/" />
+          <Route path="/movies-carousel/" component={Main} />
         </Switch>
       </div>
     </Router>

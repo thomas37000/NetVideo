@@ -2,26 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Card, CardBody, CardTitle } from "reactstrap";
 
-// componentDidMount() {
-//   const { match: { params } } = this.props;
-
-//   axios.get(`/api/users/${params.userId}`)
-//     .then(({ data: user }) => {
-//       console.log('user', user);
-
-//       this.setState({ user });
-//     });
-// }
-
-// render() {
-//   return (
-//     <div>
-//       {/* <div>{id}</div>
-//       <div>{title}</div> */}
-//     </div>
-//   );
-// }
-
 class MovieDetails extends Component {
   constructor(props) {
     super(props);
@@ -42,9 +22,8 @@ class MovieDetails extends Component {
     const { id } = this.props.match.params;
     axios
       .get(
-        `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json`
+        `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json/${id}`
       )
-      
       .then((res) => {
         console.log("movie detail", res);
         this.setState({ movies: res.data.movies, genres: res.data.genres });
@@ -54,10 +33,8 @@ class MovieDetails extends Component {
   render() {
     const {
       actors,
-      id,
       director,
       plot,
-      posterUrl,
       genres,
       moviesDetail,
       runtime,

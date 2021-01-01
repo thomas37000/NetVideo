@@ -58,16 +58,9 @@ export default class RecentMovies extends Component {
 
   render() {
     const {
-      directorMovies,
-      durationMovies,
-      genres,
-      genreMovies,
-      handleChange,
       movies,
       oldMovies,
       recentMovies,
-      searchString,
-      filter,
     } = this.state;
 
     return (

@@ -107,17 +107,7 @@ const Container = styled.div`
 `;
 
 const Grid = (props) => {
-  const {
-    actors,
-    id,
-    director,
-    plot,
-    posterUrl,
-    genres,
-    runtime,
-    title,
-    year,
-  } = props;
+  const { id, posterUrl, title } = props;
   return (
     <Container>
       <div className="bg">

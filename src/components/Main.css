@@ -1,14 +1,33 @@
 html::before {
-  content:"";
-  display:block;
+  content: "";
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
   min-height: 100%;
   width: 100%;
-  z-index:-1;
-  background-image: url('https://p0.storage.canalblog.com/05/58/849913/113855401.jpg');
+  z-index: -1;
+  background-image: url("https://p0.storage.canalblog.com/05/58/849913/113855401.jpg");
   background-size: auto;
+}
+
+.Main::before {
+  padding: 2rem;
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: #fff;
+  opacity: 0.5;
+}
+
+.Main {
+  margin: 0 auto;
+  width: 80%;
 }
 
 .row {
@@ -19,9 +38,15 @@ html::before {
 .rec-slider-container {
   background: #fff;
 }
+.lgksPe:hover:enabled {
+  background-color: black;
+}
 
 .MovieList {
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.9) 0px 0px 10px 0px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .movieCard {
   align-items: center;

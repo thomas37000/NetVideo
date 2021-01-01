@@ -5,15 +5,9 @@ import "./Main.css";
 
 export default function Movie(props) {
   const {
-    actors,
     id,
-    director,
-    plot,
     posterUrl,
-    genres,
-    runtime,
     title,
-    year,
   } = props;
 
   return (

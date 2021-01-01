@@ -55,16 +55,9 @@ export default class OldMovies extends Component {
   }
   render() {
     const {
-      directorMovies,
       durationMovies,
-      genres,
-      genreMovies,
-      handleChange,
       movies,
       oldMovies,
-      recentMovies,
-      searchString,
-      filter,
     } = this.state;
 
     return (

@@ -85,13 +85,11 @@ class MovieList extends Component {
     const {
       directorMovies,
       durationMovies,
-      genres,
       genreMovies,
       handleChange,
       movies,
       oldMovies,
       recentMovies,
-      searchString,
     } = this.state;
 
     return (
