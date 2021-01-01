@@ -1,0 +1,74 @@
+.layout {
+  display: flex;
+}
+
+.MovieList {
+  /* box-shadow: rgba(0, 0, 0, 0.9) 0px 0px 10px 0px; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.movieCard {
+  align-items: center;
+  background: #fff;
+  max-width: 30%;
+}
+
+.movieCard:hover {
+  background-color: lightgray;
+}
+
+.row {
+  background: lightgray;
+}
+
+.btn-link {
+  color: #fff;
+}
+
+.btn-link :hover {
+  color: red;
+  text-decoration: none;
+}
+
+.rec-slider-container {
+  background: #fff;
+}
+
+.isFavorite {
+  width: 40px;
+  height: 40px;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/35/Emoji_u2665.svg");
+  background-size: 100%;
+  align-self: flex-start;
+}
+
+.notFavorite {
+  width: 40px;
+  height: 40px;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/4f/Ei-heart.svg");
+  background-size: 100%;
+  align-self: flex-start;
+}
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  .movieCard {
+    height: 10rem;
+  }
+
+  .title,
+  .duration,
+  .director,
+  .actors,
+  .year,
+  .description {
+    display: none;
+  }
+
+  .MovieList {
+    display: flex;
+  }
+  img {
+    width: 200px;
+  }
+}

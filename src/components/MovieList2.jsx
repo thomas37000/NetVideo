@@ -4,7 +4,7 @@ import { Row, Col, Container, Button } from "reactstrap";
 import axios from "axios";
 // import MovieCard from "./MovieCard";
 import Grid from "./MovieCard2";
-import "./Main.css";
+import "./movie.css";
 
 export default class MovieList2 extends Component {
   constructor(props) {
@@ -121,29 +121,27 @@ export default class MovieList2 extends Component {
             </Button>
           </Col>
 
-          
-            {movies
-              .filter((movie) => {
-                return recentMovies
-                  ? parseInt(movie.year) >= 2010
-                  : true && oldMovies
-                  ? parseInt(movie.year) <= 1980
-                  : true && durationMovies
-                  ? parseInt(movie.runtime) >= 180
-                  : true && directorMovies
-                  ? movie.director === "Tim Burton"
-                  : "all" && genreMovies
-                  ? movie.genres === "War"
-                  : "all";
-              })
-              .map((movie) => (
-                <Grid
-                  {...movie}
-                  key={movie.id}
-                  handleClick={() => this.deleteGame(movie.id)}
-                />
-              ))}
-          
+          {movies
+            .filter((movie) => {
+              return recentMovies
+                ? parseInt(movie.year) >= 2010
+                : true && oldMovies
+                ? parseInt(movie.year) <= 1980
+                : true && durationMovies
+                ? parseInt(movie.runtime) >= 180
+                : true && directorMovies
+                ? movie.director === "Tim Burton"
+                : "all" && genreMovies
+                ? movie.genres === "War"
+                : "all";
+            })
+            .map((movie) => (
+              <Grid
+                {...movie}
+                key={movie.id}
+                handleClick={() => this.deleteGame(movie.id)}
+              />
+            ))}
         </Row>
       </Container>
     );

@@ -33,23 +33,25 @@ const NavBar = (props) => {
             <NavItem>
               <NavLink href="/movies-carousel">Carousel</NavLink>
             </NavItem>
-            {/* <UncontrolledDropdown nav inNavbar>
+            <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Options
+                Genres
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
+                  Comedy
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  Reset
+                  Crime
                 </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>
+                  Fantasy
+                </DropdownItem>
+                <DropdownItem divider />
               </DropdownMenu>
-            </UncontrolledDropdown> */}
+            </UncontrolledDropdown>
           </Nav>
           {/* <NavbarText>Simple Text</NavbarText> */}
         </Collapse>

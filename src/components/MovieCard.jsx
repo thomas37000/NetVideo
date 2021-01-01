@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import "./Main.css";
+import "./movie.css";
 
 export default function Movie(props) {
   const {

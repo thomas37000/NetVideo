@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { Button } from "reactstrap";
+import {
+  Button,
+  Col,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Row,
+  UncontrolledDropdown,
+} from "reactstrap";
 // import PropTypes from "prop-types";
 import Movie from "./Movie";
 import axios from "axios";
-import "./Main.css";
+import "./movie.css";
 
 class MovieList extends Component {
   constructor(props) {
@@ -11,6 +19,7 @@ class MovieList extends Component {
     this.state = {
       movies: [],
       genres: [],
+      AtoZ: false,
       directorMovies: false,
       durationMovies: false,
       genreMovies: false,
@@ -24,6 +33,7 @@ class MovieList extends Component {
     this.MoviesHandler3 = this.MoviesHandler3.bind(this);
     this.MoviesHandler4 = this.MoviesHandler4.bind(this);
     this.MovieDirector = this.MovieDirector.bind(this);
+    this.filterByName = this.filterByName.bind(this);
   }
 
   componentDidMount() {
@@ -77,12 +87,20 @@ class MovieList extends Component {
     });
   }
 
+  filterByName() {
+    const nameAtoZ = this.state.AtoZ.toUpperCase();
+    this.setState({
+      AtoZ: !nameAtoZ,
+    });
+  }
+
   handleChange = (event) => {
     this.setState({ searchString: event.target.value });
   };
 
   render() {
     const {
+      AtoZ,
       directorMovies,
       durationMovies,
       genreMovies,
@@ -93,26 +111,45 @@ class MovieList extends Component {
     } = this.state;
 
     return (
-      <div>
-        <input type="text" onChange={handleChange} placeholder="search..." />
-        <Button onClick={this.MoviesHandler}>
-          {recentMovies ? "all movies" : "recent movies"}
-        </Button>
-        <Button onClick={this.MoviesHandler2}>
-          {oldMovies ? "all movies" : "old movies"}
-        </Button>
-        <Button onClick={this.MoviesHandler3}>
-          {durationMovies ? "all movies" : "long movies"}
-        </Button>
+      <div className="layout">
+        <Row className="py-5">
+          <Col>
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder="search..."
+            />
+            <Button color="link" onClick={this.MoviesHandler}>
+              {recentMovies ? "all movies" : "recent movies"}
+            </Button>
+            <Button color="link" onClick={this.MoviesHandler2}>
+              {oldMovies ? "all movies" : "old movies"}
+            </Button>
+            <Button color="link" onClick={this.MoviesHandler3}>
+              {durationMovies ? "all movies" : "long movies"}
+            </Button>
+            <Button color="link" onClick={this.MovieDirector}>
+              {directorMovies ? "all movies" : "Tim Burton"}
+            </Button>
+            <UncontrolledDropdown>
+              <DropdownToggle color="link" caret >Genres</DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={this.MoviesHandler4}>{genreMovies ? "Action" : "Action"}</DropdownItem>
+                <DropdownItem onClick={this.MoviesHandler4}>{genreMovies ? "Adventure" : "Adventure"}</DropdownItem>
+                <DropdownItem onClick={this.MoviesHandler4}>{genreMovies ? "Comedy" : "Comedy"}</DropdownItem>
+                <DropdownItem onClick={this.MoviesHandler4}>{genreMovies ? "Drama" : "Drama"}</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem disabled>War</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Col>
+        </Row>
 
-        <Button onClick={this.MovieDirector}>
-          {directorMovies ? "all movies" : "Tim Burton"}
-        </Button>
-        <Button onClick={this.MoviesHandler4}>
-          {genreMovies ? "all movies" : "War movies"}
-        </Button>
         <div className="MovieList">
           {movies
+            .sort(function (a, b) {
+              return a.title - b.title;
+            })
             .filter((movie) => {
               return recentMovies
                 ? parseInt(movie.year) >= 2010
@@ -122,8 +159,16 @@ class MovieList extends Component {
                 ? parseInt(movie.runtime) >= 180
                 : true && directorMovies
                 ? movie.director === "Tim Burton"
-                : "all" && genreMovies
-                ? movie.genres === "War"
+                : "all" &&  genreMovies
+                ? movie.genres[0] === "Action"
+                :"all" && genreMovies
+                ? movie.genres[0] === "Adventure"
+                :"all" && genreMovies
+                ? movie.genres[0] === "Comedy"
+                :"all" && genreMovies
+                ? movie.genres[0] === "Drama"
+                :"all" && AtoZ
+                ? movie.title
                 : "all";
             })
             // .filter((movie) => {

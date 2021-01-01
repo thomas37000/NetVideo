@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Card, CardBody, CardTitle } from "reactstrap";
+import "./movie.css";
 
 class MovieDetails extends Component {
   constructor(props) {

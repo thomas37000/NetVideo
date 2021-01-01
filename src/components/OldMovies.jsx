@@ -3,9 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import { Row, Col, Container, Button } from "reactstrap";
 import Carousel from "react-elastic-carousel";
 import axios from "axios";
-// import MovieCard from "./MovieCard";
+// import MovieCard from "../MovieCard";
 import Grid from "./MovieCard2";
-import "./Main.css";
+import "./movie.css";
 
 const breakPoints = [
   { width: 1, itemsToShow: 2 },
