@@ -18,7 +18,6 @@ class MovieList extends Component {
     super(props);
     this.state = {
       movies: [],
-      genres: [],
       AtoZ: false,
       directorMovies: false,
       durationMovies: false,
@@ -31,7 +30,7 @@ class MovieList extends Component {
     this.MoviesHandler = this.MoviesHandler.bind(this);
     this.MoviesHandler2 = this.MoviesHandler2.bind(this);
     this.MoviesHandler3 = this.MoviesHandler3.bind(this);
-    this.MoviesHandler4 = this.MoviesHandler4.bind(this);
+    this.MovieGenre = this.MovieGenre.bind(this);
     this.MovieDirector = this.MovieDirector.bind(this);
     this.filterByName = this.filterByName.bind(this);
   }
@@ -73,7 +72,7 @@ class MovieList extends Component {
     });
   }
 
-  MoviesHandler4() {
+  MovieGenre() {
     const Genre = this.state.genreMovies;
     this.setState({
       genreMovies: !Genre,
@@ -120,26 +119,83 @@ class MovieList extends Component {
               placeholder="search..."
             />
             <Button color="link" onClick={this.MoviesHandler}>
-              {recentMovies ? "all movies" : "recent movies"}
+              {recentMovies ? "recent movies" : "recent movies"}
             </Button>
             <Button color="link" onClick={this.MoviesHandler2}>
-              {oldMovies ? "all movies" : "old movies"}
+              {oldMovies ? "old movies" : "old movies"}
             </Button>
             <Button color="link" onClick={this.MoviesHandler3}>
-              {durationMovies ? "all movies" : "long movies"}
+              {durationMovies ? "long movies" : "long movies"}
             </Button>
             <Button color="link" onClick={this.MovieDirector}>
-              {directorMovies ? "all movies" : "Tim Burton"}
+              {directorMovies ? "Tim Burton" : "Tim Burton"}
             </Button>
             <UncontrolledDropdown>
-              <DropdownToggle color="link" caret >Genres</DropdownToggle>
+              <DropdownToggle color="link" caret>
+                Genres
+              </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={this.MoviesHandler4}>{genreMovies ? "Action" : "Action"}</DropdownItem>
-                <DropdownItem onClick={this.MoviesHandler4}>{genreMovies ? "Adventure" : "Adventure"}</DropdownItem>
-                <DropdownItem onClick={this.MoviesHandler4}>{genreMovies ? "Comedy" : "Comedy"}</DropdownItem>
-                <DropdownItem onClick={this.MoviesHandler4}>{genreMovies ? "Drama" : "Drama"}</DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Action" : "Action"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Adventure" : "Adventure"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Animation" : "Animation"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Biography" : "Biography"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Comedy" : "Comedy"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Crime" : "Crime"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Drama" : "Drama"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Fantasy" : "Fantasy"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Horror" : "Horror"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Mystery" : "Mystery"}
+                </DropdownItem>
+                {/* <DropdownItem divider />
+                <DropdownItem disabled onClick={this.MovieGenre}>
+                  {genreMovies ? "Family" : "Family"}
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem disabled onClick={this.MovieGenre}>
+                  {genreMovies ? "History" : "History"}
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Musical" : "Musical"}
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Romance" : "Romance"}
+                </DropdownItem>
+                <DropdownItem disabled onClick={this.MovieGenre}>
+                  {genreMovies ? "Sci-Fi" : "Sci-Fi"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Sport" : "Sport"}
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem disabled onClick={this.MovieGenre}>
+                  {genreMovies ? "Thriller" : "Thriller"}
+                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem disabled>War</DropdownItem>
+                <DropdownItem onClick={this.MovieGenre}>
+                  {genreMovies ? "Western" : "Western"}
+                </DropdownItem>*/}
               </DropdownMenu>
             </UncontrolledDropdown>
           </Col>
@@ -159,18 +215,35 @@ class MovieList extends Component {
                 ? parseInt(movie.runtime) >= 180
                 : true && directorMovies
                 ? movie.director === "Tim Burton"
-                : "all" &&  genreMovies
+                : "all" && genreMovies
                 ? movie.genres[0] === "Action"
-                :"all" && genreMovies
+                : "all" && genreMovies
+                ? movie.genres[0] === "Animation"
+                : "all" && genreMovies
                 ? movie.genres[0] === "Adventure"
-                :"all" && genreMovies
+                : "all" && genreMovies
+                ? movie.genres[0] === "Biography"
+                : "all" && genreMovies
                 ? movie.genres[0] === "Comedy"
-                :"all" && genreMovies
+                : "all" && genreMovies
+                ? movie.genres[0] === "Crime"
+                : "all" && genreMovies
                 ? movie.genres[0] === "Drama"
-                :"all" && AtoZ
+                : "all" && genreMovies
+                ? movie.genres[0] === "Fantasy"
+                : "all" && genreMovies
+                ? movie.genres[0] === "Horror"
+                : "all" && genreMovies
+                ? movie.genres[0] === "Mystery"
+                : "all" && AtoZ
                 ? movie.title
                 : "all";
             })
+            // .filter((movie) => {
+            //   if (movie.genres[0] === "History") {
+            //     return true;
+            //   }
+            // })
             // .filter((movie) => {
             //   if(searchString == "") {
             //   return movie
@@ -178,9 +251,11 @@ class MovieList extends Component {
             //   return movie
             // }
             // })
+            // .map((movie) => [...movie.director])}
             .map((movie) => (
               <Movie key={movie.id} {...movie} />
             ))}
+            
           {/* {genres.map((genre) => (
           <Movie key={genre.id} {...genre} />
         ))} */}

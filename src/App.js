@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MovieDetails from "./components/MovieDetails";
+import Directors from "./components/AllDirectors";
 import MovieList from "./components/MovieList";
 import NavBar from "./components/NavBar";
 import Main from "./components/main";
@@ -17,6 +18,7 @@ function App() {
           </Route>
           <Route path="/movie-detail/:id" component={MovieDetails} />
           <Route path="/movies-carousel/" component={Main} />
+          <Route path="/movies-directors/" component={Directors} />
         </Switch>
       </div>
     </Router>

@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.layout2 {
+  display: flex;
+  background: #fff;
+}
+
 .MovieList {
   /* box-shadow: rgba(0, 0, 0, 0.9) 0px 0px 10px 0px; */
   display: flex;
