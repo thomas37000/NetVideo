@@ -25,6 +25,7 @@
 
 .row {
   background: lightgray;
+  display: table!important;
 }
 
 .btn-link {
@@ -57,23 +58,38 @@
 }
 
 @media screen and (min-width: 200px) and (max-width: 640px) {
+  .layout {
+    display: grid;
+  }
+  .col {
+    display: flex;
+    justify-content: center;
+  }
+
   .movieCard {
     height: 10rem;
   }
 
-  .title,
+  .actors,
   .duration,
   .director,
-  .actors,
-  .year,
-  .description {
+  .description,
+  .genres,
+  .title,
+  .year
+  {
     display: none;
   }
 
   .MovieList {
     display: flex;
   }
+
+  .movieCard {
+    max-width: 35%;
+  }
+
   img {
-    width: 200px;
+    max-width: -webkit-fill-available;
   }
 }

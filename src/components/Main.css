@@ -11,6 +11,10 @@ html::before {
   background-size: auto;
 }
 
+/* body {
+  background: #141414;
+} */
+
 .Main::before {
   padding: 2rem;
   content: "";

@@ -71,11 +71,11 @@ const MovieList = () => {
     <div className="layout">
       <Row className="py-5">
         <Col>
-          <input
+          {/* <input
             type="text"
             // onChange={handleChange}
             placeholder="search..."
-          />
+          /> */}
 
           {/* <Button color="link" onClick={this.MoviesHandler}>
               {recentMovies ? "1990" : "1990"}
