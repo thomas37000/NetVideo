@@ -1,65 +1,63 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from "reactstrap";
+import axios from "axios";
 import "./movie.css";
 
-class MovieDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      moviesDetail: [],
-      genres: [],
+const MovieDetails = () => {
+  const { id } = useParams();
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [movieDetail, setMovieDetail] = useState([]);
+
+  useEffect(() => {
+    const getMovieDetail = async () => {
+      try {
+        const res = await axios.get(
+          `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json/${id}`
+        );
+        setData(res.data);
+        setMovieDetail(res.data.movies);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
     };
-    this.getMovie = this.getMovie.bind(this);
-    // this.getMovieImages = this.getMovieImages.bind(this);
-  }
+    getMovieDetail();
+  }, [id]);
 
-  componentDidMount() {
-    this.getMovie();
-    // this.getMovieImages();
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error...</div>;
 
-  getMovie() {
-    const { id } = this.props.match.params;
-    axios
-      .get(
-        `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json/${id}`
-      )
-      .then((res) => {
-        console.log("movie detail", res);
-        this.setState({ movies: res.data.movies, genres: res.data.genres });
-      });
-  }
+  const {
+    actors,
+    director,
+    plot,
+    genres,
+    moviesDetail,
+    runtime,
+    title,
+    year,
+  } = data;
 
-  render() {
-    const {
-      actors,
-      director,
-      plot,
-      genres,
-      moviesDetail,
-      runtime,
-      title,
-      year,
-    } = this.state;
-
-    return (
-      <div className="CardsDetail">
-        <Card>
-          <CardBody>
-            <CardTitle tag="h5">movie: {moviesDetail.title}</CardTitle>
-            <h2 className="title">{title}</h2>
-            <h3 className="director">director: {director}</h3>
-            <h3 className="year">year: {year}</h3>
-            <p className="duration">duration: {runtime} min</p>
-            <p className="genres">genre: {genres}</p>
-            <p className="actors">actors: {actors}</p>
-            <p className="description">description: {plot}</p>
-          </CardBody>
-        </Card>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="CardsDetail">
+      <Card>
+        <CardBody>
+          <CardTitle tag="h5">movie: {  title}</CardTitle>
+          <h2 className="title">{title}</h2>
+          <h3 className="director">director: {director}</h3>
+          <h3 className="year">year: {year}</h3>
+          <p className="duration">duration: {runtime} min</p>
+          <p className="genres">genre: {genres}</p>
+          <p className="actors">actors: {actors}</p>
+          <p className="description">description: {plot}</p>
+        </CardBody>
+      </Card>
+    </div>
+  );
+};
 
 export default MovieDetails;
