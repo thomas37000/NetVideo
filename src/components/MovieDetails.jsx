@@ -17,7 +17,6 @@ const MovieDetails = () => {
         const res = await axios.get(
           `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json/${id}`
         );
-        setData(res.data);
         setMovieDetail(res.data.movies);
       } catch (error) {
         setError(error);

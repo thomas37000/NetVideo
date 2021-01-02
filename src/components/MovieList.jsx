@@ -12,21 +12,38 @@ import {
 import Movie from "./Movie";
 import axios from "axios";
 import "./movie.css";
-import "./checkbox.css";
 
 const MovieList = () => {
+  const [actionMovies, setActionMovies] = useState(false);
+  const [animationMovies, setAnimationMovies] = useState(false);
+  const [adventureMovies, setAdventureMovies] = useState(false);
+  const [biographyMovies, setBiographyMovies] = useState(false);
+  const [comedyMovies, setComedyMovies] = useState(false);
+  const [crimeMovies, setCrimeMovies] = useState(false);
   const [directorMovies, setDirectorMovies] = useState(false);
   const [directorMovies2, setDirectorMovies2] = useState(false);
   const [directorMovies3, setDirectorMovies3] = useState(false);
+  const [dramaMovies, setDramaMovies] = useState(false);
   const [durationMovies, setDurationMovies] = useState(false);
-  const [recentMovies, setRecentMovies] = useState(false);
-  const [genreMovies, setGenreMovies] = useState(false);
+  const [fantasyMovies, setFantasyMovies] = useState(false);
+  const [familyMovies, setFamilyMovies] = useState(false);
+  const [historyMovies, setHistoryMovies] = useState(false);
+  const [horrorMovies, setHorrorMovies] = useState(false);
+  const [musicalMovies, setMusicalMovies] = useState(false);
+  const [mysteryMovies, setMysteryMovies] = useState(false);
+  const [movies, setMovies] = useState([]);
   const [oldMovies, setOldMovies] = useState(false);
+  const [recentMovies, setRecentMovies] = useState(false);
+  const [romanceMovies, setRomanceMovies] = useState(false);
+  const [sfMovies, setSfMovies] = useState(false);
+  const [sportMovies, setSportMovies] = useState(false);
+  const [thrillerMovies, setThrillerMovies] = useState(false);
+  const [warMovies, setWarMovies] = useState(false);
+  const [westernMovies, setWesternMovies] = useState(false);
   const [alphabet, setAlphabet] = useState(false);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
 
   useEffect(() => {
     axios
@@ -35,17 +52,9 @@ const MovieList = () => {
       )
       .then((res) => {
         console.log(res);
-        setData(res.data.movies);
         setMovies(res.data.movies);
-        setOldMovies(res.data.movies);
-        setGenreMovies(res.data.movies);
-        setRecentMovies(res.data.movies);
-        setDurationMovies(res.data.movies);
-        setDirectorMovies(res.data.movies);
-        setDirectorMovies2(res.data.movies);
-        setDirectorMovies3(res.data.movies);
       });
-  }, []);
+  }, [movies]);
 
   // filterByName() {
   //   const nameAtoZ = this.state.AtoZ.toUpperCase();
@@ -67,20 +76,24 @@ const MovieList = () => {
             // onChange={handleChange}
             placeholder="search..."
           />
-          <Button color="link" onClick={() => setRecentMovies()}>
-            {recentMovies ? "all" : "recent movies"}
-          </Button>
+
           {/* <Button color="link" onClick={this.MoviesHandler}>
               {recentMovies ? "1990" : "1990"}
             </Button>
             <Button color="link" onClick={this.MoviesHandler}>
               {recentMovies2 ? "1980" : "1980"}
             </Button> */}
-          <Button color="link" onClick={() => setOldMovies()}>
-            {oldMovies ? "old movies" : "old movies"}
+          <Button color="link" onClick={() => setRecentMovies(!recentMovies)}>
+            {recentMovies ? "all" : "recent movies"}
           </Button>
-          <Button color="link" onClick={() => setDurationMovies()}>
-            {durationMovies ? "long movies" : "long movies"}
+          <Button color="link" onClick={() => setOldMovies(!oldMovies)}>
+            {oldMovies ? "all" : "old movies"}
+          </Button>
+          <Button
+            color="link"
+            onClick={() => setDurationMovies(!durationMovies)}
+          >
+            {durationMovies ? "all" : "long movies"}
           </Button>
 
           <UncontrolledDropdown>
@@ -88,20 +101,23 @@ const MovieList = () => {
               Directors
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={() => setDirectorMovies()}>
+              <DropdownItem onClick={() => setDirectorMovies(!directorMovies)}>
                 {directorMovies
                   ? "Francis Ford Coppola"
                   : "Francis Ford Coppola"}
               </DropdownItem>
-              <DropdownItem onClick={() => setDirectorMovies2()}>
+              <DropdownItem
+                onClick={() => setDirectorMovies2(!directorMovies2)}
+              >
                 {directorMovies2 ? "Martin Scorsese" : "Martin Scorsese"}
               </DropdownItem>
-              <DropdownItem onClick={() => setDirectorMovies3()}>
+              <DropdownItem
+                onClick={() => setDirectorMovies3(!directorMovies3)}
+              >
                 {directorMovies3 ? "Tim Burton" : "Tim Burton"}
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
-
           <p></p>
           <p></p>
           <UncontrolledDropdown>
@@ -109,35 +125,68 @@ const MovieList = () => {
               Genres
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Action" : "Action"}
+              <DropdownItem onClick={() => setActionMovies(!actionMovies)}>
+                {actionMovies ? "Action" : "Action"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Adventure" : "Adventure"}
+              <DropdownItem
+                onClick={() => setAdventureMovies(!adventureMovies)}
+              >
+                {adventureMovies ? "Adventure" : "Adventure"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Animation" : "Animation"}
+              <DropdownItem
+                onClick={() => setAnimationMovies(!animationMovies)}
+              >
+                {animationMovies ? "Animation" : "Animation"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Biography" : "Biography"}
+              <DropdownItem
+                onClick={() => setBiographyMovies(!biographyMovies)}
+              >
+                {biographyMovies ? "Biography" : "Biography"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Comedy" : "Comedy"}
+              <DropdownItem onClick={() => setComedyMovies(!comedyMovies)}>
+                {comedyMovies ? "Comedy" : "Comedy"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Crime" : "Crime"}
+              <DropdownItem onClick={() => setCrimeMovies(!crimeMovies)}>
+                {crimeMovies ? "Crime" : "Crime"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Drama" : "Drama"}
+              <DropdownItem onClick={() => setDramaMovies(!dramaMovies)}>
+                {dramaMovies ? "Drama" : "Drama"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Fantasy" : "Fantasy"}
+              <DropdownItem onClick={() => setFamilyMovies(!familyMovies)}>
+                {familyMovies ? "Family" : "Family"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Horror" : "Horror"}
+              <DropdownItem onClick={() => setFantasyMovies(!fantasyMovies)}>
+                {fantasyMovies ? "Fantasy" : "Fantasy"}
               </DropdownItem>
-              <DropdownItem onClick={() => setGenreMovies()}>
-                {genreMovies ? "Mystery" : "Mystery"}
+              <DropdownItem onClick={() => setHistoryMovies(!historyMovies)}>
+                {historyMovies ? "History" : "History"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setHorrorMovies(!horrorMovies)}>
+                {horrorMovies ? "Horror" : "Horror"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setMusicalMovies(!musicalMovies)}>
+                {musicalMovies ? "Musical" : "Musical"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setMysteryMovies(!mysteryMovies)}>
+                {mysteryMovies ? "Mystery" : "Mystery"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setRomanceMovies(!romanceMovies)}>
+                {romanceMovies ? "Romance" : "Romance"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setSfMovies(!sfMovies)}>
+                {sfMovies ? "Sci-Fi" : "Sci-Fi"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setSportMovies(!sportMovies)}>
+                {sportMovies ? "Sport" : "Sport"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setThrillerMovies(!thrillerMovies)}>
+                {thrillerMovies ? "Thriller" : "Thriller"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setWarMovies(!warMovies)}>
+                {warMovies ? "War" : "War"}
+              </DropdownItem>
+              <DropdownItem onClick={() => setWesternMovies(!westernMovies)}>
+                {westernMovies ? "Western" : "Western"}
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
@@ -162,48 +211,49 @@ const MovieList = () => {
               ? movie.director === "Martin Scorsese"
               : "all" && directorMovies3
               ? movie.director === "Tim Burton"
-              : "all" && genreMovies
+              : "all" && actionMovies
               ? movie.genres[0] === "Action"
-              : "all" && genreMovies
+              : "all" && animationMovies
               ? movie.genres[0] === "Animation"
-              : "all" && genreMovies
+              : "all" && adventureMovies
               ? movie.genres[0] === "Adventure"
-              : "all" && genreMovies
+              : "all" && biographyMovies
               ? movie.genres[0] === "Biography"
-              : "all" && genreMovies
+              : "all" && comedyMovies
               ? movie.genres[0] === "Comedy"
-              : "all" && genreMovies
+              : "all" && crimeMovies
               ? movie.genres[0] === "Crime"
-              : "all" && genreMovies
+              : "all" && dramaMovies
               ? movie.genres[0] === "Drama"
-              : "all" && genreMovies
+              : "all" && familyMovies
+              ? movie.genres[(1, 2)] === "Family"
+              : "all" && fantasyMovies
               ? movie.genres[0] === "Fantasy"
-              : "all" && genreMovies
+              : "all" && historyMovies
+              ? movie.genres[(1, 2)] === "History"
+              : "all" && horrorMovies
               ? movie.genres[0] === "Horror"
-              : "all" && genreMovies
+              : "all" && musicalMovies
+              ? movie.genres[1] === "Musical"
+              : "all" && mysteryMovies
               ? movie.genres[0] === "Mystery"
+              : "all" && romanceMovies
+              ? movie.genres[(1, 2)] === "Romance"
+              : "all" && sfMovies
+              ? movie.genres[(1, 2)] === "Sci-Fi"
+              : "all" && sportMovies
+              ? movie.genres[(1, 2)] === "Sport"
+              : "all" && thrillerMovies
+              ? movie.genres[2] === "Thriller"
+              : "all" && warMovies
+              ? movie.genres[(1, 2)] === "War"
+              : "all" && westernMovies
+              ? movie.genres[1] === "Western"
               : "all";
           })
-          // .filter((movie) => {
-          //   if (movie.genres[0] === "History") {
-          //     return true;
-          //   }
-          // })
-          // .filter((movie) => {
-          //   if(searchString == "") {
-          //   return movie
-          // } else if(movie.) {
-          //   return movie
-          // }
-          // })
-          // .map((movie) => [...movie.director])}
           .map((movie) => (
             <Movie key={movie.id} {...movie} />
           ))}
-
-        {/* {genres.map((genre) => (
-          <Movie key={genre.id} {...genre} />
-        ))} */}
       </div>
     </div>
   );
