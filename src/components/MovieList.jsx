@@ -24,8 +24,10 @@ class MovieList extends Component {
       genreMovies: false,
       oldMovies: false,
       recentMovies: false,
+      recentMovies2: false,
       searchString: "",
     };
+    this.Movies1980 = this.Movies1980.bind(this);
     this.FetchMovies = this.FetchMovies.bind(this);
     this.MoviesHandler = this.MoviesHandler.bind(this);
     this.MoviesHandler2 = this.MoviesHandler2.bind(this);
@@ -53,8 +55,18 @@ class MovieList extends Component {
   MoviesHandler() {
     console.log("test");
     const Recent = this.state.recentMovies;
+    const Recent2 = this.state.recentMovies;
     this.setState({
       recentMovies: !Recent,
+      recentMovies2: !Recent2,
+    });
+  }
+
+  Movies1980() {
+    console.log("test");
+    const Recent2 = this.state.recentMovies;
+    this.setState({
+      recentMovies2: !Recent2,
     });
   }
 
@@ -107,6 +119,7 @@ class MovieList extends Component {
       movies,
       oldMovies,
       recentMovies,
+      recentMovies2,
     } = this.state;
 
     return (
@@ -120,6 +133,12 @@ class MovieList extends Component {
             />
             <Button color="link" onClick={this.MoviesHandler}>
               {recentMovies ? "recent movies" : "recent movies"}
+            </Button>
+            <Button color="link" onClick={this.MoviesHandler}>
+              {recentMovies ? "1990" : "1990"}
+            </Button>
+            <Button color="link" onClick={this.Movies1980}>
+              {recentMovies2 ? "1980" : "1980"}
             </Button>
             <Button color="link" onClick={this.MoviesHandler2}>
               {oldMovies ? "old movies" : "old movies"}
@@ -209,6 +228,8 @@ class MovieList extends Component {
             .filter((movie) => {
               return recentMovies
                 ? parseInt(movie.year) >= 2010
+                : true && recentMovies2
+                ? parseInt(movie.year) >= 1980 
                 : true && oldMovies
                 ? parseInt(movie.year) <= 1980
                 : true && durationMovies
@@ -255,7 +276,7 @@ class MovieList extends Component {
             .map((movie) => (
               <Movie key={movie.id} {...movie} />
             ))}
-            
+
           {/* {genres.map((genre) => (
           <Movie key={genre.id} {...genre} />
         ))} */}

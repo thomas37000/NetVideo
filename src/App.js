@@ -1,27 +1,21 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import MovieDetails from "./components/MovieDetails";
-import Directors from "./components/AllDirectors";
-import MovieList from "./components/MovieList";
-import NavBar from "./components/NavBar";
-import Main from "./components/main";
+import Routter from "./Router";
 import "./App.css";
+
+function loader() {
+  document.querySelector(".loader-container").classList.add("hidden");
+}
+
+setTimeout(loader, 100);
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <NavBar />
-        <Switch>
-          <Route exact path="/movies">
-            <MovieList />
-          </Route>
-          <Route path="/movie-detail/:id" component={MovieDetails} />
-          <Route path="/movies-carousel/" component={Main} />
-          <Route path="/movies-directors/" component={Directors} />
-        </Switch>
+    <div className="App">
+      <div class="loader-container">
+        <div class="loader"></div>
       </div>
-    </Router>
+      <Routter />
+    </div>
   );
 }
 
