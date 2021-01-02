@@ -12,6 +12,7 @@ import {
 import Movie from "./Movie";
 import axios from "axios";
 import "./movie.css";
+import "./checkbox.css";
 
 class MovieList extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class MovieList extends Component {
       movies: [],
       AtoZ: false,
       directorMovies: false,
+      directorMovies2: false,
       durationMovies: false,
       genreMovies: false,
       oldMovies: false,
@@ -34,6 +36,8 @@ class MovieList extends Component {
     this.MoviesHandler3 = this.MoviesHandler3.bind(this);
     this.MovieGenre = this.MovieGenre.bind(this);
     this.MovieDirector = this.MovieDirector.bind(this);
+    this.MovieDirector2 = this.MovieDirector2.bind(this);
+    this.MovieDirector3 = this.MovieDirector3.bind(this);
     this.filterByName = this.filterByName.bind(this);
   }
 
@@ -48,17 +52,15 @@ class MovieList extends Component {
       )
       .then((res) => {
         console.log(res);
-        this.setState({ movies: res.data.movies, genres: res.data.genres });
+        this.setState({ movies: res.data.movies });
       });
   }
 
   MoviesHandler() {
     console.log("test");
     const Recent = this.state.recentMovies;
-    const Recent2 = this.state.recentMovies;
     this.setState({
       recentMovies: !Recent,
-      recentMovies2: !Recent2,
     });
   }
 
@@ -98,6 +100,20 @@ class MovieList extends Component {
     });
   }
 
+  MovieDirector2() {
+    const Director2 = this.state.directorMovies2;
+    this.setState({
+      directorMovies2: !Director2,
+    });
+  }
+
+  MovieDirector3() {
+    const Director3 = this.state.directorMovies3;
+    this.setState({
+      directorMovies3: !Director3,
+    });
+  }
+
   filterByName() {
     const nameAtoZ = this.state.AtoZ.toUpperCase();
     this.setState({
@@ -113,6 +129,8 @@ class MovieList extends Component {
     const {
       AtoZ,
       directorMovies,
+      directorMovies2,
+      directorMovies3,
       durationMovies,
       genreMovies,
       handleChange,
@@ -132,12 +150,12 @@ class MovieList extends Component {
               placeholder="search..."
             />
             <Button color="link" onClick={this.MoviesHandler}>
-              {recentMovies ? "recent movies" : "recent movies"}
+              {recentMovies ? "all" : "recent movies"}
             </Button>
             <Button color="link" onClick={this.MoviesHandler}>
               {recentMovies ? "1990" : "1990"}
             </Button>
-            <Button color="link" onClick={this.Movies1980}>
+            <Button color="link" onClick={this.MoviesHandler}>
               {recentMovies2 ? "1980" : "1980"}
             </Button>
             <Button color="link" onClick={this.MoviesHandler2}>
@@ -146,9 +164,27 @@ class MovieList extends Component {
             <Button color="link" onClick={this.MoviesHandler3}>
               {durationMovies ? "long movies" : "long movies"}
             </Button>
-            <Button color="link" onClick={this.MovieDirector}>
-              {directorMovies ? "Tim Burton" : "Tim Burton"}
-            </Button>
+
+            <UncontrolledDropdown>
+              <DropdownToggle color="link" caret>
+                Directors
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={this.MovieDirector}>
+                  {directorMovies
+                    ? "Francis Ford Coppola"
+                    : "Francis Ford Coppola"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieDirector2}>
+                  {directorMovies2 ? "Martin Scorsese" : "Martin Scorsese"}
+                </DropdownItem>
+                <DropdownItem onClick={this.MovieDirector3}>
+                  {directorMovies3 ? "Tim Burton" : "Tim Burton"}
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+
+            <p></p><p></p>
             <UncontrolledDropdown>
               <DropdownToggle color="link" caret>
                 Genres
@@ -229,12 +265,16 @@ class MovieList extends Component {
               return recentMovies
                 ? parseInt(movie.year) >= 2010
                 : true && recentMovies2
-                ? parseInt(movie.year) >= 1980 
+                ? parseInt(movie.year) >= 1980
                 : true && oldMovies
                 ? parseInt(movie.year) <= 1980
                 : true && durationMovies
                 ? parseInt(movie.runtime) >= 180
                 : true && directorMovies
+                ? movie.director === "Francis Ford Coppola"
+                : "all" && directorMovies2
+                ? movie.director === "Martin Scorsese"
+                : "all" && directorMovies3
                 ? movie.director === "Tim Burton"
                 : "all" && genreMovies
                 ? movie.genres[0] === "Action"
