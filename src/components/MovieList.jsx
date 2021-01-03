@@ -71,11 +71,14 @@ const MovieList = () => {
     <div className="layout">
       <Row className="py-5">
         <Col>
-          {/* <input
+          <input
             type="text"
-            // onChange={handleChange}
+            onChange={" "}
             placeholder="search..."
-          /> */}
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }}
+          />
 
           {/* <Button color="link" onClick={this.MoviesHandler}>
               {recentMovies ? "1990" : "1990"}
@@ -197,6 +200,14 @@ const MovieList = () => {
         {movies
           .sort(function (a, b) {
             return a.title - b.title;
+          })
+          .filter((movie) => {
+            if (search === "") {
+              return movie;
+            }else if(movie.title.toLowerCase()
+            .includes(search.toLowerCase())){
+              return movie
+            }
           })
           .filter((movie) => {
             return recentMovies
