@@ -4,6 +4,7 @@ import { Row, Col, Container, Button } from "reactstrap";
 import axios from "axios";
 // import MovieCard from "./MovieCard";
 import Grid from "./MovieCard2";
+import Api from "./Api/Api";
 import "./movie.css";
 
 export default class MovieList2 extends Component {
@@ -33,14 +34,10 @@ export default class MovieList2 extends Component {
   }
 
   FetchMovies() {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
-      )
-      .then((res) => {
-        console.log(res);
-        this.setState({ movies: res.data.movies, genres: res.data.genres });
-      });
+    axios.get(`${Api}`).then((res) => {
+      console.log(res);
+      this.setState({ movies: res.data.movies, genres: res.data.genres });
+    });
   }
 
   MoviesHandler() {

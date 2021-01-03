@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import PropTypes from "prop-types";
+import Api from "./Api/Api";
 import axios from "axios";
 import "./movie.css";
 
@@ -16,7 +17,7 @@ const MovieDetails = () => {
     const getMovieDetail = async () => {
       try {
         const res = await axios.get(
-          `https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json/${id}`
+          `${Api}/${id}`
         );
         setMovieDetail(res.data.movies);
       } catch (error) {

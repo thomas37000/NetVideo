@@ -12,6 +12,7 @@ import {
 import Movie from "./Movie";
 import axios from "axios";
 import "./movie.css";
+import Api from "./Api/Api";
 
 class MovieFilters extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class MovieFilters extends Component {
   FetchMovies() {
     axios
       .get(
-        "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
+        `${Api}`
       )
       .then((res) => {
         console.log(res);

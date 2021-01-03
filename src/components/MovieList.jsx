@@ -8,9 +8,12 @@ import {
   Row,
   UncontrolledDropdown,
 } from "reactstrap";
+
 import Movie from "./Movie";
 import axios from "axios";
 import "./movie.css";
+import Api from "./Api/Api";
+
 
 const MovieList = () => {
   const [actionMovies, setActionMovies] = useState(false);
@@ -44,14 +47,10 @@ const MovieList = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
-      )
-      .then((res) => {
-        console.log(res);
-        setMovies(res.data.movies);
-      });
+    axios.get(`${Api}`).then((res) => {
+      console.log(res);
+      setMovies(res.data.movies);
+    });
   }, []);
 
   return (
