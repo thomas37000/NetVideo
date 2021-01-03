@@ -8,7 +8,6 @@ import {
   Row,
   UncontrolledDropdown,
 } from "reactstrap";
-// import PropTypes from "prop-types";
 import Movie from "./Movie";
 import axios from "axios";
 import "./movie.css";
@@ -40,10 +39,9 @@ const MovieList = () => {
   const [thrillerMovies, setThrillerMovies] = useState(false);
   const [warMovies, setWarMovies] = useState(false);
   const [westernMovies, setWesternMovies] = useState(false);
-  const [alphabet, setAlphabet] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // filtre by Name de A à Z
+  // const [alphabet, setAlphabet] = useState(false);
   const [search, setSearch] = useState("");
-  // const [data, setData] = useState({});
 
   useEffect(() => {
     axios
@@ -54,18 +52,7 @@ const MovieList = () => {
         console.log(res);
         setMovies(res.data.movies);
       });
-  }, [movies]);
-
-  // filterByName() {
-  //   const nameAtoZ = this.state.AtoZ.toUpperCase();
-  //   this.setState({
-  //     AtoZ: !nameAtoZ,
-  //   });
-  // }
-
-  // handleChange = (event) => {
-  //   this.setState({ searchString: event.target.value });
-  // };
+  }, []);
 
   return (
     <div className="layout">
@@ -73,12 +60,35 @@ const MovieList = () => {
         <Col>
           <input
             type="text"
-            onChange={" "}
+            value={search}
             placeholder="search..."
             onChange={(event) => {
               setSearch(event.target.value);
             }}
+            onKeyPress={() => {}}
           />
+          <Button onClick={() => setSearch("")}>reset</Button>
+
+          <UncontrolledDropdown>
+            <DropdownToggle color="link" caret>
+              Search Films by Name
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem onClick={() => setDirectorMovies(!directorMovies)}>
+                A
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => setDirectorMovies2(!directorMovies2)}
+              >
+                B
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => setDirectorMovies3(!directorMovies3)}
+              >
+                C
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
 
           {/* <Button color="link" onClick={this.MoviesHandler}>
               {recentMovies ? "1990" : "1990"}
@@ -204,10 +214,12 @@ const MovieList = () => {
           .filter((movie) => {
             if (search === "") {
               return movie;
-            }else if(movie.title.toLowerCase()
-            .includes(search.toLowerCase())){
-              return movie
+            } else if (
+              movie.title.toLowerCase().includes(search.toLowerCase())
+            ) {
+              return movie;
             }
+            return false;
           })
           .filter((movie) => {
             return recentMovies

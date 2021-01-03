@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { Card, CardBody, CardTitle } from "reactstrap";
+import PropTypes from "prop-types";
 import axios from "axios";
 import "./movie.css";
 
 const MovieDetails = () => {
   const { id } = useParams();
-  const [data, setData] = useState([]);
+  const [data] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [movieDetail, setMovieDetail] = useState([]);
@@ -45,7 +46,7 @@ const MovieDetails = () => {
     <div className="CardsDetail">
       <Card>
         <CardBody>
-          <CardTitle tag="h5">movie: {  title}</CardTitle>
+          <CardTitle tag="h5">movie: {title}</CardTitle>
           <h2 className="title">{title}</h2>
           <h3 className="director">director: {director}</h3>
           <h3 className="year">year: {year}</h3>
@@ -57,6 +58,15 @@ const MovieDetails = () => {
       </Card>
     </div>
   );
+};
+MovieDetails.propTypes = {
+  actors: PropTypes.string.isRequired,
+  director: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired,
+  plot: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  runtime: PropTypes.number.isRequired,
+  year: PropTypes.number.isRequired,
 };
 
 export default MovieDetails;

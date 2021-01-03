@@ -12,8 +12,8 @@ setTimeout(loader, 100);
 function App() {
   return (
     <div className="App">
-      <div class="loader-container">
-        <div class="loader"></div>
+      <div className="loader-container">
+        <div className="loader"></div>
       </div>
       <Routter />
       <ScrollUpButton
