@@ -11,15 +11,19 @@ const MovieDetails = () => {
   const [data] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [movieDetail, setMovieDetail] = useState([]);
+  const [movieDetail, setMovieDetail] = useState(null);
 
   useEffect(() => {
     const getMovieDetail = async () => {
       try {
         const res = await axios.get(
-          `${Api}/${id}`
+          `${Api}`
         );
-        setMovieDetail(res.data.movies);
+        // obligé de mettre un parseInt pour récupérer l' id 
+        // car il le considère comme du texte
+        setMovieDetail(res.data.movies.filter((movie) => {
+          return movie.id === parseInt(id);
+        })[0]);
       } catch (error) {
         setError(error);
       } finally {
@@ -28,7 +32,9 @@ const MovieDetails = () => {
     };
     getMovieDetail();
   }, [id]);
+  console.log(movieDetail);
 
+  if (!movieDetail) return <div>err...</div>;
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error...</div>;
 
@@ -47,14 +53,14 @@ const MovieDetails = () => {
     <div className="CardsDetail">
       <Card>
         <CardBody>
-          <CardTitle tag="h5">movie: {title}</CardTitle>
-          <h2 className="title">{title}</h2>
-          <h3 className="director">director: {director}</h3>
-          <h3 className="year">year: {year}</h3>
-          <p className="duration">duration: {runtime} min</p>
-          <p className="genres">genre: {genres}</p>
-          <p className="actors">actors: {actors}</p>
-          <p className="description">description: {plot}</p>
+          <CardTitle tag="h5">movie: {movieDetail.title}</CardTitle>
+          <h2 className="title">{movieDetail.title}</h2>
+          <h3 className="director">director: {movieDetail.director}</h3>
+          <h3 className="year">year: {movieDetail.year}</h3>
+          <p className="duration">duration: {movieDetail.runtime} min</p>
+          <p className="genres">genre: {movieDetail.genres}</p>
+          <p className="actors">actors: {movieDetail.actors}</p>
+          <p className="description">description: {movieDetail.plot}</p>
         </CardBody>
       </Card>
     </div>
